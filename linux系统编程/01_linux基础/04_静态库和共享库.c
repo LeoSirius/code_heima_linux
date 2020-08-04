@@ -5,6 +5,17 @@
 
 制作静态库
 
-ar rcs 静态库名 .o文件
+1. 将.c生成.o文件
+   gcc -c add.c -o add.o
+   gcc -c sub.c -o sub.o
+
+2. ar rcs 静态库名 .o文件
+   ar rcs libmymath.a add.o sub.o
+
+使用静态库
+
+   gcc test.c libmymath.a -o test.out
+
+制作动态库
 
 
