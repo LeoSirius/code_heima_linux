@@ -27,16 +27,24 @@
 2. 使用gcc -shared 来制作动态库
     gcc -shared -o libmymath.so add.o
 
-3. 使用动态库。不用编到out文件里，但是要指定
+3. 使用动态库。不用编到把库编到out文件里，但是要指定A
     - -l指定动态库名
     - -L指定动态库路径
     gcc test.c -o a.out -lmymath -L.
 
 - 链接器：在链接阶段工作，-l -L 两个选项工作
-- 动态链接器：在运行时工作，需要提供动态库所在目录位置。环境变量LD_LIBRARY_PATH
+- 动态链接器：在运行时工作，需要提供动态库所在目录位置。环境变量LD_LIBRARY_PATH。
 
 4. 运行
 
 $ export LD_LIBRARY_PATH=./
 $ ./a.out 
 add(4, 6) = 10
+
+可以用命令ldd查看可以执程序在执行时会加载那些动态库。
+
+在编译时给动态链接器指定动态库位置的方法
+
+1. 指定环境变量LD_LIBRARY_PATH
+2. 把动态库放到/lib/x86... 目录下（不推荐）
+3. 编辑/etc/ld.so.conf，把路径加进去。ldconfig -v加载配置（推荐）
